@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet'
+import Moment from 'react-moment';
 
 const Map = ({ position, show, markers }) => {
   const Icon = L.icon({
@@ -36,7 +37,7 @@ const Map = ({ position, show, markers }) => {
           return (
             <Marker key={el._id} position={[el.latitude, el.longitude]} icon={Icon}>
               <Popup>
-                {el.name} <br /> {el.message}.
+                {el.name} <br /> {el.message} <br /> <Moment format="DD-MM-YYYY" date={el.date} />.
               </Popup>
             </Marker>
           )
