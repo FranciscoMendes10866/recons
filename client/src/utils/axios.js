@@ -1,8 +1,11 @@
 import { create } from 'axios';
 
-const instance = create({
+export const IPAPI = create({
   baseURL: 'https://ipapi.co',
   timeout: 6000,
 });
 
-export default instance;
+export const API = create({
+  baseURL: 'http://localhost:9000',
+  timeout: 6000,
+});

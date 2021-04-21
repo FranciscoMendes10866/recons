@@ -1,7 +1,17 @@
-import { FormControl, FormLabel, Input, Flex, Button } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Flex,
+  Button,
+  useToast,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 
-const Form = () => {
+import { API } from '../utils/axios';
+
+const Form = ({ position }) => {
+  const toast = useToast();
   const [state, setState] = useState({
     name: '',
     message: '',
@@ -10,9 +20,25 @@ const Form = () => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
-  const handleOnClick = e => {
+  const handleOnClick = async e => {
     e.preventDefault();
-    console.log(state);
+    await API.post('/', {
+      ...state,
+      latitude: position.lat,
+      longitude: position.lng,
+    })
+      .then(({ data }) => {
+        if (data) {
+          toast({
+            title: 'Your location was submited!',
+            description: "We've created a marker for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          });
+        }
+      })
+      .catch(err => console.log(err));
   };
   return (
     <Flex direction="column">

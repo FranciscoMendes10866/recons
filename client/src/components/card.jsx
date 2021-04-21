@@ -2,13 +2,13 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 
 import Form from './form';
 
-const Card = () => {
+const Card = ({ position }) => {
   return (
     <Box
       p="5"
       maxW="320px"
-      top="4"
-      right="4"
+      top="2"
+      right="2"
       position="fixed"
       zIndex="999"
       bg="gray.700"
@@ -35,7 +35,7 @@ const Card = () => {
         Keep track of your own location.
       </Text>
       <Flex mt={8} align="center">
-        <Form />
+        <Form position={position} />
       </Flex>
     </Box>
   );
