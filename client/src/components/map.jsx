@@ -34,7 +34,7 @@ const Map = ({ position, show, markers }) => {
       {markers.length >= 1 ? (
         markers.map(el => {
           return (
-            <Marker position={[el.latitude, el.longitude]} icon={Icon}>
+            <Marker key={el._id} position={[el.latitude, el.longitude]} icon={Icon}>
               <Popup>
                 {el.name} <br /> {el.message}.
               </Popup>
