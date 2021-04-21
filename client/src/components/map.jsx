@@ -1,20 +1,22 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet'
+import L from 'leaflet';
 import Moment from 'react-moment';
 
 const Map = ({ position, show, markers }) => {
   const Icon = L.icon({
-    iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
+    iconUrl:
+      'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
     iconSize: [50, 55],
     iconAnchor: [25, 55],
-    popupAnchor: [0, -55]
-  })
+    popupAnchor: [0, -55],
+  });
   const userIcon = L.icon({
-    iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Map_marker.svg/500px-Map_marker.svg.png',
+    iconUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Map_marker.svg/500px-Map_marker.svg.png',
     iconSize: [40, 60],
     iconAnchor: [20, 57],
-    popupAnchor: [0, -55]
-  })
+    popupAnchor: [0, -55],
+  });
   return (
     <MapContainer
       center={[position.lat, position.lng]}
@@ -27,22 +29,25 @@ const Map = ({ position, show, markers }) => {
       />
       {show ? (
         <Marker position={[position.lat, position.lng]} icon={userIcon}>
-          <Popup>
-            This one is your current location!
-          </Popup>
+          <Popup>This one is your current location!</Popup>
         </Marker>
       ) : null}
-      {markers.length >= 1 ? (
-        markers.map(el => {
-          return (
-            <Marker key={el._id} position={[el.latitude, el.longitude]} icon={Icon}>
-              <Popup>
-                {el.name} <br /> {el.message} <br /> <Moment format="DD-MM-YYYY" date={el.date} />.
-              </Popup>
-            </Marker>
-          )
-        })
-      ): null}
+      {markers.length >= 1
+        ? markers.map(el => {
+            return (
+              <Marker
+                key={el._id}
+                position={[el.latitude, el.longitude]}
+                icon={Icon}
+              >
+                <Popup>
+                  {el.name} <br /> {el.message} <br />{' '}
+                  <Moment format="DD-MM-YYYY" date={el.date} />.
+                </Popup>
+              </Marker>
+            );
+          })
+        : null}
     </MapContainer>
   );
 };
